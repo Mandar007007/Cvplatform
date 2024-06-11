@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
+import { getAuth,GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
@@ -19,6 +19,8 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+export const googleAuthProvider = new GoogleAuthProvider();
+
 
 export async function uploadPDF(file, userId, description) {
     // Create a storage reference with a unique filename
@@ -30,9 +32,6 @@ export async function uploadPDF(file, userId, description) {
     // Get the download URL of the uploaded file
     const downloadURL = await getDownloadURL(storageRef);
     
-    // Create a document reference in the 'pdfMetadata' collection
-  
-
     const data = {
         userId,
         fileName: file.name,
@@ -47,9 +46,9 @@ export async function uploadPDF(file, userId, description) {
         },
         body:JSON.stringify(data)
     }
-    // Set the document data
+    
     const res = await fetch("https://cvplatform-5bd6b-default-rtdb.firebaseio.com/Userdata.json",options );
-    console.log(res)
+    console.log("result is here:",res)
 
     console.log('File uploaded successfully:', downloadURL);
     return downloadURL; 
