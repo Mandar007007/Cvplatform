@@ -38,7 +38,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        {isLoggedIn ? <Route path='/uploadcv' element={<UploadCVs />} /> : <Route path='/uploadcv' element={<Home />} />}
+        {isLoggedIn ? <Route path='/uploadcv' element={<Home />} /> : <Route path='/uploadcv' element={<Home />} />}
       </Routes>
       
     </Router>

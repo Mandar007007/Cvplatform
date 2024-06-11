@@ -50,6 +50,15 @@ const Home = () => {
 
   const handleFileUpload = async () => {
     try {
+      if(localStorage.getItem('user') == null)
+        {
+          toast.error("Please signin")
+          return;
+        }
+      if(selectedFiles.length == 0 || description.length == 0) {
+        toast.warn("Please select a file or add description")
+        return;
+      }
       let downloadurl = await uploadPDF(selectedFiles[0], JSON.parse(localStorage.getItem('user')).uid, description);
       if(downloadurl)
       {toast.success('Pdf Uploaded Successfully', {
