@@ -92,7 +92,7 @@ const Navbar = () => {
                 ) : (
                   <Button
                     variant="ghost"
-                    className="text-white hover:bg-gray-700"
+                    className= "bg-white"
                     onClick={handleSubmit}
                   >
                     <FaGoogle className="mr-1" /> Google Sign-in
